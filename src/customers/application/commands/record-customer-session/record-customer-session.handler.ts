@@ -1,0 +1,36 @@
+import { Inject } from '@nestjs/common';
+import { CommandHandler, type ICommandHandler } from '@common/application/cqrs';
+import { RecordCustomerSessionCommand } from './record-customer-session.command';
+import type { CustomerWithFullDetailsReadModel } from '@customers/application/read-models';
+import { CustomerReadModelMapper } from '@customers/application/mappers';
+import { getOwnedCustomer } from '@customers/application/get-owned-customer';
+import type { ICustomerRepository } from '@customers/domain/repositories';
+import { CUSTOMER_REPOSITORY } from '@customers/domain/tokens';
+
+@CommandHandler(RecordCustomerSessionCommand)
+export class RecordCustomerSessionHandler implements ICommandHandler<
+  RecordCustomerSessionCommand,
+  CustomerWithFullDetailsReadModel
+> {
+  constructor(
+    private readonly mapper: CustomerReadModelMapper,
+    @Inject(CUSTOMER_REPOSITORY)
+    private readonly customerRepository: ICustomerRepository,
+  ) {}
+
+  async execute(
+    command: RecordCustomerSessionCommand,
+  ): Promise<CustomerWithFullDetailsReadModel> {
+    const { customerId, userId } = command.payload;
+    const customer = await getOwnedCustomer(
+      this.customerRepository,
+      customerId,
+      userId,
+    );
+
+    customer.recordSession();
+    await this.customerRepository.save(customer);
+
+    return this.mapper.toReadModelWithFullDetails(customer);
+  }
+}
