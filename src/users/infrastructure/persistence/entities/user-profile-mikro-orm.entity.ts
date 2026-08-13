@@ -62,7 +62,7 @@ export class UserProfileMikroOrmEntity
     default: 'PLN',
   })
   currency: Currency;
-  @Property({ type: 'text' })
+  @Property({ type: 'integer' })
   sessionDurationMinutes: number;
   @Property({ type: 'boolean', default: false })
   courtFeeIncluded: boolean;
