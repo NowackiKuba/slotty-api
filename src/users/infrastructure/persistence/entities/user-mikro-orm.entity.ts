@@ -12,7 +12,6 @@ export type UserMikroOrmEntityProps = {
   emailVerified: boolean;
   status: string;
   subscriptionStatus: string;
-
   timezone: string;
   lastLoginAt?: Date;
   createdAt?: Date;
