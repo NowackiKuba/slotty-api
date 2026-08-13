@@ -1,0 +1,58 @@
+name: slotty
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    ports:
+      - '${PORT:-3000}:3000'
+    env_file:
+      - .env
+    environment:
+      DB_HOST: postgres
+      REDIS_HOST: redis
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: ${DB_USER:-slotty}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-slotty}
+      POSTGRES_DB: ${DB_NAME:-slotty}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        ['CMD-SHELL', 'pg_isready -U ${DB_USER:-slotty} -d ${DB_NAME:-slotty}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

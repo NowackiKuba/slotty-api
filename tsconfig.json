@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@database/*": ["src/database/*"],
+      "@common/*": ["src/common/*"],
+      "@users/*": ["src/users/*"],
+      "@badges/*": ["src/badges/*"],
+      "@challenges/*": ["src/challenges/*"],
+      "@energy-profiles/*": ["src/energy-profiles/*"],
+      "@check-ins/*": ["src/check-ins/*"],
+      "@notifications/*": ["src/notifications/*"],
+      "@auth/*": ["src/auth/*"],
+      "@ai/*": ["src/ai/*"],
+      "@insights/*": ["src/insights/*"],
+      "@subscriptions/*": ["src/subscriptions/*"]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false
+  }
+}
