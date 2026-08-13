@@ -1,6 +1,9 @@
 export enum Sport {
   TENNIS = 'tennis',
   PADEL = 'padel',
+  SQUASH = 'squash',
+  PICKLEBALL = 'pickleball',
+  PINGPONG = 'pingpong',
 }
 
 const SPORT_VALUES = new Set<string>(Object.values(Sport));
