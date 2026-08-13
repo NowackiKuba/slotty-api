@@ -17,4 +17,9 @@ export type {
   BankDetailsProps,
   PaymentDetailsProps,
 } from './payment-details.vo';
+export { UserIntegrationId } from './user-integration-id.vo';
+export {
+  IntegrationStatus,
+} from './integration-status.vo';
+export type { IntegrationStatusValue } from './integration-status.vo';
 

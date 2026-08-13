@@ -7,3 +7,12 @@ export type {
   UserProfileProps,
   UserProfileSnapshot,
 } from './user-profile.types';
+export type {
+  GoogleCalendarSettings,
+  InstagramSettings,
+  IntegrationSettings,
+  WhatsAppSettings,
+  CreateUserIntegrationProps,
+  UserIntegrationProps,
+  UserIntegrationSnapshot,
+} from './user-integration.types';
