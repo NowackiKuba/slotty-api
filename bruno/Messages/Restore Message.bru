@@ -1,0 +1,15 @@
+meta {
+  name: Restore Message
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/messages/:messageId/restore
+  body: none
+  auth: inherit
+}
+
+params:path {
+  messageId: {{messageId}}
+}

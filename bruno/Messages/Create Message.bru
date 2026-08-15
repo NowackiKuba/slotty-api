@@ -1,0 +1,37 @@
+meta {
+  name: Create Message
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/messages
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "customerId": "{{customerId}}",
+    "messageContent": "Cześć, potwierdzam trening na jutro o 18:00",
+    "sender": "TRAINER",
+    "channel": "WHATSAPP",
+    "externalMessageId": "wa-msg-001"
+  }
+}
+
+script:post-response {
+  if ((res.status === 201 || res.status === 200) && res.body && res.body.id) {
+    bru.setEnvVar("messageId", res.body.id);
+  }
+}
+
+docs {
+  Sender: CUSTOMER | AI_BOT | TRAINER.
+  Channel: INSTAGRAM | WHATSAPP | SMS.
+  externalMessageId is optional and generated when omitted.
+}

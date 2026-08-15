@@ -1,0 +1,17 @@
+meta {
+  name: List Thread
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/messages/thread
+  body: none
+  auth: inherit
+}
+
+params:query {
+  customerId: {{customerId}}
+  page: 1
+  limit: 50
+}

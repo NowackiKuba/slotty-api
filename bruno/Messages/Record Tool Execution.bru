@@ -1,0 +1,29 @@
+meta {
+  name: Record Tool Execution
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/messages/:messageId/tools
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  messageId: {{messageId}}
+}
+
+body:json {
+  {
+    "toolName": "CreateEventCommand",
+    "args": {
+      "startDate": "2026-08-20T18:00:00.000Z"
+    },
+    "result": "SUCCESS"
+  }
+}

@@ -20,7 +20,7 @@
       "@users/*": ["src/users/*"],
       "@customers/*": ["src/customers/*"],
       "@events/*": ["src/events/*"],
-      "@energy-profiles/*": ["src/energy-profiles/*"],
+      "@messages/*": ["src/messages/*"],
       "@check-ins/*": ["src/check-ins/*"],
       "@notifications/*": ["src/notifications/*"],
       "@auth/*": ["src/auth/*"],

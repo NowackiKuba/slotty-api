@@ -1,0 +1,19 @@
+meta {
+  name: Delete Message
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/messages/:messageId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  messageId: {{messageId}}
+}
+
+docs {
+  Soft-delete. 204 No Content.
+}
