@@ -1,0 +1,15 @@
+meta {
+  name: Get Package
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/packages/{{customerPackageId}}
+  body: none
+  auth: inherit
+}
+
+docs {
+  GET /api/packages/:customerPackageId
+}

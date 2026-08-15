@@ -1,0 +1,38 @@
+meta {
+  name: Create Template
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/packages/templates
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Pakiet 10 treningów",
+    "description": "W cenie kort i piłki",
+    "sessionCount": 10,
+    "price": 140000,
+    "currency": "PLN",
+    "validityDays": 90,
+    "isActive": true
+  }
+}
+
+script:post-response {
+  if ((res.status === 201 || res.status === 200) && res.body && res.body.id) {
+    bru.setEnvVar("packageTemplateId", res.body.id);
+  }
+}
+
+docs {
+  POST /api/packages/templates
+  price is minor units (grosze).
+}

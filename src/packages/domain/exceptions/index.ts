@@ -1,4 +1,5 @@
 export { CustomerPackageAccessDeniedException } from './customer-package-access-denied.exception';
+export { CustomerPackageAlreadyDeletedException } from './customer-package-already-deleted.exception';
 export { CustomerPackageNotFoundException } from './customer-package-not-found.exception';
 export { InvalidCustomerPackageException } from './invalid-customer-package.exception';
 export { InvalidCustomerPackageIdException } from './invalid-customer-package-id.exception';
@@ -7,4 +8,5 @@ export { InvalidCustomerPackageTransitionException } from './invalid-customer-pa
 export { InvalidPackageTemplateException } from './invalid-package-template.exception';
 export { InvalidPackageTemplateIdException } from './invalid-package-template-id.exception';
 export { PackageTemplateAccessDeniedException } from './package-template-access-denied.exception';
+export { PackageTemplateAlreadyDeletedException } from './package-template-already-deleted.exception';
 export { PackageTemplateNotFoundException } from './package-template-not-found.exception';

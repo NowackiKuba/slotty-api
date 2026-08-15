@@ -2,7 +2,7 @@ import { Currency } from '@common/domain/enums';
 import { generateUUID } from '@common/uuid';
 import { CustomerMikroOrmEntity } from '@customers/infrastructure/persistence/entities';
 import { BaseEntity } from '@database/base.entity';
-import { Entity, Enum, ManyToOne, Property } from '@mikro-orm/core';
+import { Entity, Enum, Index, ManyToOne, Property } from '@mikro-orm/core';
 import { UserMikroOrmEntity } from '@users/infrastructure/persistence/entities';
 import { PackageTemplateMikroOrmEntity } from './package-template-mikro-orm.entity';
 import { CustomerPackageStatusEnum } from '@packages/domain/enums';
@@ -31,6 +31,8 @@ export type CustomerPackageMikroOrmEntityProps = {
 };
 
 @Entity({ tableName: 'customer_packages' })
+@Index({ properties: ['user', 'createdAt'] })
+@Index({ properties: ['user', 'customer'] })
 export class CustomerPackageMikroOrmEntity
   extends BaseEntity
   implements CustomerPackageMikroOrmEntityProps
@@ -68,7 +70,7 @@ export class CustomerPackageMikroOrmEntity
   })
   status: CustomerPackageStatusEnum;
 
-  @Property({ type: 'datetime', nullable: true })
+  @Property({ type: 'timestamptz', nullable: true })
   expiresAt?: Date | null;
 
   constructor(props: CustomerPackageMikroOrmEntityProps) {

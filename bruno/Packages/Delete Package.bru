@@ -1,0 +1,15 @@
+meta {
+  name: Delete Package
+  type: http
+  seq: 10
+}
+
+delete {
+  url: {{baseUrl}}/packages/{{customerPackageId}}
+  body: none
+  auth: inherit
+}
+
+docs {
+  DELETE /api/packages/:customerPackageId
+}

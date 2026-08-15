@@ -1,0 +1,34 @@
+meta {
+  name: Assign Package
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/packages
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "customerId": "{{customerId}}",
+    "packageTemplateId": "{{packageTemplateId}}",
+    "isPaid": true
+  }
+}
+
+script:post-response {
+  if ((res.status === 201 || res.status === 200) && res.body && res.body.id) {
+    bru.setEnvVar("customerPackageId", res.body.id);
+  }
+}
+
+docs {
+  POST /api/packages
+  Snapshot from template, or pass name + totalSessions + pricePaid.
+}

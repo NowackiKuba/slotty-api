@@ -1,0 +1,27 @@
+meta {
+  name: Update Template
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/packages/templates/{{packageTemplateId}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Pakiet 10 treningów Premium",
+    "price": 160000,
+    "isActive": true
+  }
+}
+
+docs {
+  PATCH /api/packages/templates/:packageTemplateId
+}

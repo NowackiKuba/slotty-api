@@ -1,7 +1,7 @@
 import { Currency } from '@common/domain/enums';
 import { generateUUID } from '@common/uuid';
 import { BaseEntity } from '@database/base.entity';
-import { Entity, Enum, ManyToOne, Property } from '@mikro-orm/core';
+import { Entity, Enum, Index, ManyToOne, Property } from '@mikro-orm/core';
 import { UserMikroOrmEntity } from '@users/infrastructure/persistence/entities';
 
 export type PackageTemplateMikroOrmEntityProps = {
@@ -20,6 +20,7 @@ export type PackageTemplateMikroOrmEntityProps = {
 };
 
 @Entity({ tableName: 'package_templates' })
+@Index({ properties: ['user'] })
 export class PackageTemplateMikroOrmEntity
   extends BaseEntity
   implements PackageTemplateMikroOrmEntityProps

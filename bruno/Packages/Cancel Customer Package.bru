@@ -1,0 +1,15 @@
+meta {
+  name: Cancel Package
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/packages/{{customerPackageId}}/cancel
+  body: none
+  auth: inherit
+}
+
+docs {
+  POST /api/packages/:customerPackageId/cancel
+}
