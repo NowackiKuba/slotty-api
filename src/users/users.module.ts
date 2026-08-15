@@ -30,6 +30,8 @@ import { RestoreUserHandler } from './application/commands/restore-user/restore-
 import { SoftDeleteUserHandler } from './application/commands/soft-delete-user/soft-delete-user.handler';
 import { StartIntegrationOAuthHandler } from './application/commands/start-integration-oauth/start-integration-oauth.handler';
 import { SoftDeleteUserIntegrationHandler } from './application/commands/soft-delete-user-integration/soft-delete-user-integration.handler';
+import { SetUserWorkingHoursDayHandler } from './application/commands/set-user-working-hours-day/set-user-working-hours-day.handler';
+import { SetUserWorkingHoursWeekHandler } from './application/commands/set-user-working-hours-week/set-user-working-hours-week.handler';
 import { SoftDeleteUserProfileHandler } from './application/commands/soft-delete-user-profile/soft-delete-user-profile.handler';
 import { UpdateUserIntegrationSettingsHandler } from './application/commands/update-user-integration-settings/update-user-integration-settings.handler';
 import { UpdateUserIntegrationTokensHandler } from './application/commands/update-user-integration-tokens/update-user-integration-tokens.handler';
@@ -38,6 +40,7 @@ import {
   UserIntegrationReadModelMapper,
   UserProfileReadModelMapper,
   UserReadModelMapper,
+  UserWorkingHoursReadModelMapper,
 } from './application/mappers';
 import { GetUserIntegrationByProviderHandler } from './application/queries/get-user-integration-by-provider/get-user-integration-by-provider.handler';
 import { GetUserByDisplayNameHandler } from './application/queries/get-user-by-display-name/get-user-by-display-name.handler';
@@ -46,19 +49,28 @@ import { GetUserByIdHandler } from './application/queries/get-user-by-id/get-use
 import { GetUserProfileByIdHandler } from './application/queries/get-user-profile-by-id/get-user-profile-by-id.handler';
 import { GetUserProfileByUserIdHandler } from './application/queries/get-user-profile-by-user-id/get-user-profile-by-user-id.handler';
 import { ListUserIntegrationsHandler } from './application/queries/list-user-integrations/list-user-integrations.handler';
+import { ListUserWorkingHoursHandler } from './application/queries/list-user-working-hours/list-user-working-hours.handler';
 import { ListUsersHandler } from './application/queries/list-users/list-users.handler';
-import { USER_INTEGRATION_REPOSITORY, USER_PROFILE_REPOSITORY, USER_REPOSITORY } from './domain/tokens';
+import {
+  USER_INTEGRATION_REPOSITORY,
+  USER_PROFILE_REPOSITORY,
+  USER_REPOSITORY,
+  USER_WORKING_HOURS_REPOSITORY,
+} from './domain/tokens';
 import {
   UserIntegrationMikroOrmEntity,
   UserMikroOrmEntity,
   UserProfileMikroOrmEntity,
+  UserWorkingHoursMikroOrmEntity,
 } from './infrastructure/persistence/entities';
 import { UserPersistenceMapper } from './infrastructure/persistence/mappers/user.persistence-mapper';
 import { UserIntegrationPersistenceMapper } from './infrastructure/persistence/mappers/user-integration.persistence-mapper';
 import { UserProfilePersistenceMapper } from './infrastructure/persistence/mappers/user-profile.persistence-mapper';
+import { UserWorkingHoursPersistenceMapper } from './infrastructure/persistence/mappers/user-working-hours.persistence-mapper';
 import { UserIntegrationMikroOrmRepository } from './infrastructure/persistence/repositories/user-integration-mikro-orm.repository';
 import { UserMikroOrmRepository } from './infrastructure/persistence/repositories/user-mikro-orm.repository';
 import { UserProfileMikroOrmRepository } from './infrastructure/persistence/repositories/user-profile-mikro-orm.repository';
+import { UserWorkingHoursMikroOrmRepository } from './infrastructure/persistence/repositories/user-working-hours-mikro-orm.repository';
 import {
   GoogleCalendarOAuthClient,
   IntegrationOAuthClientRegistry,
@@ -69,6 +81,7 @@ import {
 import { IntegrationOAuthController } from './presentation/integration-oauth.controller';
 import { UserIntegrationsController } from './presentation/user-integrations.controller';
 import { UserProfilesController } from './presentation/user-profiles.controller';
+import { UserWorkingHoursController } from './presentation/user-working-hours.controller';
 import { UsersController } from './presentation/users.controller';
 
 const CommandHandlers = [
@@ -91,6 +104,8 @@ const CommandHandlers = [
   ChangeUserProfilePaymentsHandler,
   ChangeUserProfileAiHandler,
   SoftDeleteUserProfileHandler,
+  SetUserWorkingHoursDayHandler,
+  SetUserWorkingHoursWeekHandler,
   ConnectUserIntegrationHandler,
   DisconnectUserIntegrationHandler,
   RevokeUserIntegrationHandler,
@@ -114,6 +129,7 @@ const QueryHandlers = [
   GetUserProfileByUserIdHandler,
   ListUserIntegrationsHandler,
   GetUserIntegrationByProviderHandler,
+  ListUserWorkingHoursHandler,
 ];
 
 @Module({
@@ -124,11 +140,13 @@ const QueryHandlers = [
       UserMikroOrmEntity,
       UserProfileMikroOrmEntity,
       UserIntegrationMikroOrmEntity,
+      UserWorkingHoursMikroOrmEntity,
     ]),
   ],
   controllers: [
     UsersController,
     UserProfilesController,
+    UserWorkingHoursController,
     UserIntegrationsController,
     IntegrationOAuthController,
   ],
@@ -142,9 +160,11 @@ const QueryHandlers = [
     UserPersistenceMapper,
     UserProfilePersistenceMapper,
     UserIntegrationPersistenceMapper,
+    UserWorkingHoursPersistenceMapper,
     UserReadModelMapper,
     UserProfileReadModelMapper,
     UserIntegrationReadModelMapper,
+    UserWorkingHoursReadModelMapper,
     {
       provide: USER_REPOSITORY,
       useClass: UserMikroOrmRepository,
@@ -157,6 +177,10 @@ const QueryHandlers = [
       provide: USER_INTEGRATION_REPOSITORY,
       useClass: UserIntegrationMikroOrmRepository,
     },
+    {
+      provide: USER_WORKING_HOURS_REPOSITORY,
+      useClass: UserWorkingHoursMikroOrmRepository,
+    },
     ...CommandHandlers,
     ...QueryHandlers,
   ],
@@ -164,9 +188,11 @@ const QueryHandlers = [
     USER_REPOSITORY,
     USER_PROFILE_REPOSITORY,
     USER_INTEGRATION_REPOSITORY,
+    USER_WORKING_HOURS_REPOSITORY,
     UserReadModelMapper,
     UserProfileReadModelMapper,
     UserIntegrationReadModelMapper,
+    UserWorkingHoursReadModelMapper,
     CqrsModule,
   ],
 })

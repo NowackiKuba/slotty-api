@@ -18,6 +18,7 @@ export type {
   PaymentDetailsProps,
 } from './payment-details.vo';
 export { UserIntegrationId } from './user-integration-id.vo';
+export { UserWorkingHoursId } from './user-working-hours-id.vo';
 export {
   IntegrationStatus,
 } from './integration-status.vo';

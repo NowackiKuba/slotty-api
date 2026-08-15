@@ -1,0 +1,15 @@
+meta {
+  name: Get Working Hours
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/users/me/working-hours
+  body: none
+  auth: inherit
+}
+
+docs {
+  GET /api/users/me/working-hours
+}

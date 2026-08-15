@@ -1,0 +1,27 @@
+meta {
+  name: Change Working Hours Day
+  type: http
+  seq: 8
+}
+
+patch {
+  url: {{baseUrl}}/users/me/working-hours/1
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "startTime": "09:00",
+    "endTime": "17:00",
+    "isDayOff": false
+  }
+}
+
+docs {
+  PATCH /api/users/me/working-hours/:dayOfWeek
+}

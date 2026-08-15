@@ -1,0 +1,33 @@
+meta {
+  name: Set Working Hours
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{baseUrl}}/users/me/working-hours
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "days": [
+      { "dayOfWeek": 1, "startTime": "08:00", "endTime": "16:00", "isDayOff": false },
+      { "dayOfWeek": 2, "startTime": "08:00", "endTime": "16:00", "isDayOff": false },
+      { "dayOfWeek": 3, "startTime": "08:00", "endTime": "16:00", "isDayOff": false },
+      { "dayOfWeek": 4, "startTime": "08:00", "endTime": "16:00", "isDayOff": false },
+      { "dayOfWeek": 5, "startTime": "08:00", "endTime": "16:00", "isDayOff": false },
+      { "dayOfWeek": 6, "startTime": "00:00", "endTime": "00:00", "isDayOff": true },
+      { "dayOfWeek": 7, "startTime": "00:00", "endTime": "00:00", "isDayOff": true }
+    ]
+  }
+}
+
+docs {
+  PUT /api/users/me/working-hours
+}

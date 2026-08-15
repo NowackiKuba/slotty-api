@@ -16,3 +16,9 @@ export type {
   UserIntegrationProps,
   UserIntegrationSnapshot,
 } from './user-integration.types';
+export type {
+  ChangeUserWorkingHoursProps,
+  CreateUserWorkingHoursProps,
+  UserWorkingHoursProps,
+  UserWorkingHoursSnapshot,
+} from './user-working-hours.types';
