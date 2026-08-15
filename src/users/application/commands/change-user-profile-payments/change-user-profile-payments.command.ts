@@ -3,6 +3,7 @@ import type { PaymentDetailsProps } from '@users/domain/types';
 
 export type ChangeUserProfilePaymentsCommandPayload = {
   userId: string;
+  settlementType?: string;
   paymentMethods?: string[];
   paymentDetails?: PaymentDetailsProps | null;
   cancellationWindowHours?: number | null;

@@ -1,0 +1,15 @@
+meta {
+  name: Deactivate
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{baseUrl}}/customers/:customerId/deactivate
+  body: none
+  auth: inherit
+}
+
+params:path {
+  customerId: {{customerId}}
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Mark Error
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/users/me/integrations/:provider/mark-error
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  provider: {{provider}}
+}
+
+body:json {
+  {
+    "message": "Provider returned 401"
+  }
+}

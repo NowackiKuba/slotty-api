@@ -1,7 +1,7 @@
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 import { Currency } from '@common/domain/enums';
-import { PaymentMethod, Sport } from '@users/domain/enums';
+import { PaymentMethod, SettlementType, Sport } from '@users/domain/enums';
 
 const locationPointSchema = z.object({
   name: z.string().min(1).max(200).optional(),
@@ -40,6 +40,7 @@ export const createUserProfileSchema = z
     courtFeeIncluded: z.boolean().optional(),
     maxGroupSize: z.number().int().min(1).max(50).optional(),
     cancellationWindowHours: z.number().int().min(0).max(168).optional(),
+    settlementType: z.nativeEnum(SettlementType).optional(),
     paymentMethods: z.array(z.nativeEnum(PaymentMethod)).optional(),
     paymentDetails: paymentDetailsSchema.optional(),
     aiEnabled: z.boolean().optional(),
@@ -52,7 +53,9 @@ export const createUserProfileSchema = z
     path: ['places'],
   });
 
-export class CreateUserProfileDto extends createZodDto(createUserProfileSchema) {}
+export class CreateUserProfileDto extends createZodDto(
+  createUserProfileSchema,
+) {}
 
 export const changeUserProfileDetailsSchema = z
   .object({
@@ -101,9 +104,16 @@ export class ChangeUserProfilePricingDto extends createZodDto(
 
 export const changeUserProfilePaymentsSchema = z
   .object({
+    settlementType: z.nativeEnum(SettlementType).optional(),
     paymentMethods: z.array(z.nativeEnum(PaymentMethod)).optional(),
     paymentDetails: paymentDetailsSchema.nullable().optional(),
-    cancellationWindowHours: z.number().int().min(0).max(168).nullable().optional(),
+    cancellationWindowHours: z
+      .number()
+      .int()
+      .min(0)
+      .max(168)
+      .nullable()
+      .optional(),
   })
   .refine(atLeastOneField, { message: 'at least one field is required' });
 

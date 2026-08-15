@@ -18,6 +18,7 @@ export type CreateUserProfileCommandPayload = {
   courtFeeIncluded?: boolean;
   maxGroupSize?: number;
   cancellationWindowHours?: number;
+  settlementType?: string;
   paymentMethods?: string[];
   paymentDetails?: PaymentDetailsProps;
   aiEnabled?: boolean;

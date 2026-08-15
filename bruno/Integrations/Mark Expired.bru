@@ -1,0 +1,15 @@
+meta {
+  name: Mark Expired
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/users/me/integrations/:provider/mark-expired
+  body: none
+  auth: inherit
+}
+
+params:path {
+  provider: {{provider}}
+}

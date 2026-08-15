@@ -1,0 +1,27 @@
+meta {
+  name: Update Tokens
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/users/me/integrations/:provider/tokens
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  provider: {{provider}}
+}
+
+body:json {
+  {
+    "accessToken": "new-provider-access-token",
+    "refreshToken": "new-provider-refresh-token",
+    "expiresAt": "2026-12-31T23:59:59.000Z"
+  }
+}

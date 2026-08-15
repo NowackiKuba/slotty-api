@@ -1,0 +1,24 @@
+meta {
+  name: Change AI
+  type: http
+  seq: 8
+}
+
+patch {
+  url: {{baseUrl}}/users/me/profile/ai
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "aiEnabled": true,
+    "autoConfirmBookings": false,
+    "aiCustomInstructions": ["Keep replies short"],
+    "googleCalendarId": null
+  }
+}

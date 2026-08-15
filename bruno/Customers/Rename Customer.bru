@@ -1,0 +1,26 @@
+meta {
+  name: Rename Customer
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "firstName": "Jan",
+    "lastName": "Nowak"
+  }
+}

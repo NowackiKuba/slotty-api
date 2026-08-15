@@ -1,0 +1,25 @@
+meta {
+  name: Change Email
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId/email
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "email": "jan.nowak@example.com"
+  }
+}

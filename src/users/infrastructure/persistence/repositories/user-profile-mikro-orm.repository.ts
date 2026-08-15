@@ -4,7 +4,7 @@ import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
 import { SOFT_DELETE_FILTER } from '@database/base.entity';
 import { UserProfile } from '@users/domain/aggregates';
 import { IUserProfileRepository } from '@users/domain/repositories';
-import { UserId, UserProfileId } from '@users/domain/value-objects';
+import { UserProfileId } from '@users/domain/value-objects';
 import { UserMikroOrmEntity } from '../entities/user-mikro-orm.entity';
 import { UserProfileMikroOrmEntity } from '../entities/user-profile-mikro-orm.entity';
 import { UserProfilePersistenceMapper } from '../mappers/user-profile.persistence-mapper';
@@ -39,9 +39,9 @@ export class UserProfileMikroOrmRepository implements IUserProfileRepository {
     return profile ? this.mapper.toDomain(profile) : null;
   }
 
-  async findByUserId(userId: UserId): Promise<UserProfile | null> {
+  async findByUserId(userId: string): Promise<UserProfile | null> {
     const profile = await this.repository.findOne(
-      { user: userId.value },
+      { user: userId },
       { populate: ['user'] },
     );
 

@@ -1,0 +1,44 @@
+meta {
+  name: Create Event
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/events
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "customerId": "{{customerId}}",
+    "type": "INDIVIDUAL_SESSION",
+    "price": 15000,
+    "paymentMethod": "BLIK",
+    "currency": "PLN",
+    "location": "Kort 1",
+    "source": "TRAINER_MANUAL",
+    "title": "Trening 1v1",
+    "description": "Praca nad serwisem",
+    "startDate": "2026-08-15T08:00:00.000Z",
+    "endDate": "2026-08-15T09:00:00.000Z",
+    "preSessionPlan": "Rozgrzewka + serwis",
+    "postSessionNotes": null
+  }
+}
+
+script:post-response {
+  if ((res.status === 201 || res.status === 200) && res.body && res.body.id) {
+    bru.setEnvVar("eventId", res.body.id);
+  }
+}
+
+docs {
+  Type: INDIVIDUAL_SESSION | GROUP_SESSION | PERSONAL_BLOCK.
+  Source defaults to TRAINER_MANUAL. Saves eventId on 201.
+}

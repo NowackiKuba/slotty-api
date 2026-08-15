@@ -1,6 +1,6 @@
 import type { Currency } from '@common/domain/enums';
 import type { AggregateRootProps } from '@common/domain';
-import type { PaymentMethod, Sport } from '@users/domain/enums';
+import type { PaymentMethod, SettlementType, Sport } from '@users/domain/enums';
 import type {
   LocationPoint,
   LocationPointProps,
@@ -30,6 +30,7 @@ export type CreateUserProfileProps = {
   courtFeeIncluded?: boolean;
   maxGroupSize?: number;
   cancellationWindowHours?: number;
+  settlementType?: string;
   paymentMethods?: string[];
   paymentDetails?: PaymentDetailsProps;
   aiEnabled?: boolean;
@@ -51,6 +52,7 @@ export type UserProfileProps = AggregateRootProps<UserProfileId> & {
   courtFeeIncluded: boolean;
   maxGroupSize?: number;
   cancellationWindowHours?: number;
+  settlementType: SettlementType;
   paymentMethods: PaymentMethod[];
   paymentDetails?: PaymentDetails;
   aiEnabled: boolean;
@@ -74,6 +76,7 @@ export type UserProfileSnapshot = {
   courtFeeIncluded: boolean;
   maxGroupSize: number | null;
   cancellationWindowHours: number | null;
+  settlementType: SettlementType;
   paymentMethods: PaymentMethod[];
   paymentDetails: PaymentDetailsProps | null;
   aiEnabled: boolean;

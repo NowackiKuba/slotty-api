@@ -1,0 +1,15 @@
+meta {
+  name: Revoke
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/users/me/integrations/:provider/revoke
+  body: none
+  auth: inherit
+}
+
+params:path {
+  provider: {{provider}}
+}

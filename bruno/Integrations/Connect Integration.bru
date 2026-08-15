@@ -1,0 +1,27 @@
+meta {
+  name: Connect Integration
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/users/me/integrations
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "provider": "GOOGLE_CALENDAR",
+    "externalAccountId": "calendar-account-1",
+    "accessToken": "provider-access-token",
+    "refreshToken": "provider-refresh-token",
+    "expiresAt": "2026-12-31T23:59:59.000Z",
+    "scopes": ["calendar.readonly"],
+    "settings": {}
+  }
+}

@@ -1,5 +1,5 @@
 import type { Currency } from '@common/domain/enums';
-import type { PaymentMethod, Sport } from '@users/domain/enums';
+import type { PaymentMethod, SettlementType, Sport } from '@users/domain/enums';
 import type {
   LocationPointProps,
   PaymentDetailsProps,
@@ -20,6 +20,7 @@ export type UserProfileReadModel = {
   courtFeeIncluded: boolean;
   maxGroupSize: number | null;
   cancellationWindowHours: number | null;
+  settlementType: SettlementType;
   paymentMethods: PaymentMethod[];
   paymentDetails: PaymentDetailsProps | null;
   aiEnabled: boolean;

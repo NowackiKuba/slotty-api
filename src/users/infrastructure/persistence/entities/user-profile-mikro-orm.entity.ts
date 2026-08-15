@@ -7,6 +7,7 @@ import type {
 } from '@users/domain/types';
 import { Currency } from '@common/domain/enums';
 import { generateUUID } from '@common/uuid';
+import { SettlementType } from '@users/domain/enums';
 
 export type UserProfileMikroOrmEntityProps = {
   id?: string;
@@ -23,6 +24,7 @@ export type UserProfileMikroOrmEntityProps = {
   courtFeeIncluded?: boolean; // Czy cena zawiera kort (bardzo ważne w tenisie/padlu)
   maxGroupSize?: number; // np. 1 (personalny), 4 (padel)
   cancellationWindowHours?: number; // np. 24 (godziny przed treningiem)
+  settlementType?: SettlementType; // default: PER_SESSION
   paymentMethods?: string[]; // ['BLIK', 'CASH', 'REVOLUT']
   paymentDetails?: PaymentDetailsProps;
   aiEnabled?: boolean; // Włączony/Wyłączony bot AI
@@ -71,6 +73,11 @@ export class UserProfileMikroOrmEntity
 
   @Property({ type: 'integer', nullable: true })
   cancellationWindowHours?: number;
+  @Enum({
+    items: () => SettlementType,
+    default: SettlementType.PER_SESSION,
+  })
+  settlementType: SettlementType;
   @Property({ type: 'jsonb', nullable: true })
   paymentMethods?: string[];
   @Property({ type: 'jsonb', nullable: true })
@@ -101,6 +108,7 @@ export class UserProfileMikroOrmEntity
     this.courtFeeIncluded = props.courtFeeIncluded ?? false;
     this.maxGroupSize = props.maxGroupSize;
     this.cancellationWindowHours = props.cancellationWindowHours;
+    this.settlementType = props.settlementType ?? SettlementType.PER_SESSION;
     this.paymentMethods = props.paymentMethods;
     this.paymentDetails = props.paymentDetails;
     this.aiEnabled = props.aiEnabled;

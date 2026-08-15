@@ -1,0 +1,35 @@
+meta {
+  name: Refresh Token
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/auth/refresh
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "refreshToken": "{{refreshToken}}"
+  }
+}
+
+script:post-response {
+  if (res.status === 200 && res.body && res.body.tokens) {
+    bru.setEnvVar("accessToken", res.body.tokens.accessToken);
+    bru.setEnvVar("refreshToken", res.body.tokens.refreshToken);
+    if (res.body.user && res.body.user.id) {
+      bru.setEnvVar("userId", res.body.user.id);
+    }
+  }
+}
+
+docs {
+  POST /api/auth/refresh — rotates tokens into the Local environment.
+}

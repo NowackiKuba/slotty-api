@@ -1,0 +1,15 @@
+meta {
+  name: Block
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{baseUrl}}/customers/:customerId/block
+  body: none
+  auth: inherit
+}
+
+params:path {
+  customerId: {{customerId}}
+}

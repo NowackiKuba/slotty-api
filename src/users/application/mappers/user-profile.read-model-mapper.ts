@@ -22,6 +22,7 @@ export class UserProfileReadModelMapper {
       courtFeeIncluded: snapshot.courtFeeIncluded,
       maxGroupSize: snapshot.maxGroupSize,
       cancellationWindowHours: snapshot.cancellationWindowHours,
+      settlementType: snapshot.settlementType,
       paymentMethods: snapshot.paymentMethods,
       paymentDetails: snapshot.paymentDetails,
       aiEnabled: snapshot.aiEnabled,

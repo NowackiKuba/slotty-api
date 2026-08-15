@@ -1,0 +1,27 @@
+meta {
+  name: Update Event
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/events/:eventId
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  eventId: {{eventId}}
+}
+
+body:json {
+  {
+    "title": "Trening 1v1 - serwis",
+    "location": "Kort 2",
+    "price": 16000
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Record Sync
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/users/me/integrations/:provider/sync
+  body: none
+  auth: inherit
+}
+
+params:path {
+  provider: {{provider}}
+}

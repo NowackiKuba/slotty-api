@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { CqrsModule } from '@common/application/cqrs';
+import { DevLoginHandler } from '@auth/application/commands/dev-login/dev-login.handler';
 import { LogoutHandler } from '@auth/application/commands/logout/logout.handler';
 import { RefreshTokenHandler } from '@auth/application/commands/refresh-token/refresh-token.handler';
 import { SocialLoginHandler } from '@auth/application/commands/social-login/social-login.handler';
@@ -21,6 +22,7 @@ import { RedisModule } from '@common/redis/redis.module';
 import { UsersModule } from '@users/users.module';
 
 const CommandHandlers = [
+  DevLoginHandler,
   SocialLoginHandler,
   RefreshTokenHandler,
   LogoutHandler,

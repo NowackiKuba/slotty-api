@@ -1,0 +1,15 @@
+meta {
+  name: Delete Profile
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/users/me/profile
+  body: none
+  auth: inherit
+}
+
+docs {
+  Soft-delete. 204 No Content.
+}

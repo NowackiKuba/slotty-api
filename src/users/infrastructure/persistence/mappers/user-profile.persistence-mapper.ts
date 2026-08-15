@@ -1,6 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { UserProfile } from '@users/domain/aggregates';
-import { isPaymentMethod, isSport, type PaymentMethod, type Sport } from '@users/domain/enums';
+import {
+  isPaymentMethod,
+  isSport,
+  SettlementType,
+  type PaymentMethod,
+  type Sport,
+} from '@users/domain/enums';
 import {
   LocationPoint,
   PaymentDetails,
@@ -24,13 +30,17 @@ export class UserProfilePersistenceMapper {
       avatarUrl: entity.avatarUrl,
       places: entity.places.map((place) => LocationPoint.create(place)),
       withTravel: entity.withTravel ?? false,
-      sessionPrice: SessionPrice.create(entity.pricePerSession, entity.currency),
+      sessionPrice: SessionPrice.create(
+        entity.pricePerSession,
+        entity.currency,
+      ),
       sessionDuration: SessionDuration.create(
         Number(entity.sessionDurationMinutes),
       ),
       courtFeeIncluded: entity.courtFeeIncluded,
       maxGroupSize: entity.maxGroupSize,
       cancellationWindowHours: entity.cancellationWindowHours,
+      settlementType: entity.settlementType ?? SettlementType.PER_SESSION,
       paymentMethods: parseStoredPaymentMethods(entity.paymentMethods),
       paymentDetails: entity.paymentDetails
         ? PaymentDetails.create(entity.paymentDetails)
@@ -66,6 +76,7 @@ export class UserProfilePersistenceMapper {
       courtFeeIncluded: snapshot.courtFeeIncluded,
       maxGroupSize: snapshot.maxGroupSize ?? undefined,
       cancellationWindowHours: snapshot.cancellationWindowHours ?? undefined,
+      settlementType: snapshot.settlementType,
       paymentMethods: snapshot.paymentMethods,
       paymentDetails: snapshot.paymentDetails ?? undefined,
       aiEnabled: snapshot.aiEnabled,

@@ -1,0 +1,57 @@
+meta {
+  name: Create Profile
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/users/me/profile
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "sports": ["tennis", "padel"],
+    "nickname": "Ada",
+    "bio": "Coach based in Warsaw.",
+    "avatarUrl": "https://example.com/avatar.png",
+    "places": [
+      {
+        "name": "Central Courts",
+        "address": "ul. Marszalkowska 1, Warszawa",
+        "lat": 52.2297,
+        "lng": 21.0122
+      }
+    ],
+    "withTravel": false,
+    "pricePerSession": 15000,
+    "currency": "PLN",
+    "sessionDurationMinutes": 60,
+    "courtFeeIncluded": false,
+    "maxGroupSize": 4,
+    "cancellationWindowHours": 24,
+    "settlementType": "PER_SESSION",
+    "paymentMethods": ["BLIK", "CASH"],
+    "paymentDetails": {
+      "blikPhone": "500123456",
+      "bank": {
+        "account": "PL61109010140000071219812874",
+        "recipient": "Ada Lovelace",
+        "titleTemplate": "Training {{date}}"
+      }
+    },
+    "aiEnabled": true,
+    "autoConfirmBookings": false,
+    "aiCustomInstructions": ["Prefer morning slots"],
+    "googleCalendarId": null
+  }
+}
+
+docs {
+  Sports: tennis, padel, squash, pickleball, pingpong. Currency: PLN, EUR, USD. Settlement types: PER_SESSION, WEEKLY_IN_ADVANCE, MONTHLY_IN_ADVANCE, WEEKLY_IN_ARREARS, MONTHLY_IN_ARREARS. Payment methods: BLIK, CASH, REVOLUT. At least one place is required unless withTravel is true.
+}

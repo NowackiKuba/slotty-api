@@ -1,0 +1,24 @@
+meta {
+  name: OAuth Callback
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{baseUrl}}/integrations/oauth/callback/:provider
+  body: none
+  auth: none
+}
+
+params:path {
+  provider: {{provider}}
+}
+
+params:query {
+  code: oauth-code
+  state: oauth-state
+}
+
+docs {
+  Browser callback. Redirects when INTEGRATION_OAUTH_SUCCESS_URL is set.
+}

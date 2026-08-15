@@ -1,0 +1,19 @@
+meta {
+  name: Delete Event
+  type: http
+  seq: 10
+}
+
+delete {
+  url: {{baseUrl}}/events/:eventId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  eventId: {{eventId}}
+}
+
+docs {
+  Soft-delete. Only completed, cancelled, or no-show events. 204 No Content.
+}

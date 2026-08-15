@@ -1,0 +1,25 @@
+meta {
+  name: Update Settings
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/users/me/integrations/:provider/settings
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  provider: {{provider}}
+}
+
+body:json {
+  {
+    "settings": {}
+  }
+}

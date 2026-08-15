@@ -1,0 +1,25 @@
+meta {
+  name: Change Nickname
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId/nickname
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "nickname": "Janek"
+  }
+}

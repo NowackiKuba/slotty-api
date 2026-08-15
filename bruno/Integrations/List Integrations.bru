@@ -1,0 +1,11 @@
+meta {
+  name: List Integrations
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/users/me/integrations
+  body: none
+  auth: inherit
+}

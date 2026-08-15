@@ -3,7 +3,6 @@ import { CommandHandler, type ICommandHandler } from '@common/application/cqrs';
 import { UserProfileNotFoundException } from '@users/domain/exceptions/profile';
 import type { IUserProfileRepository } from '@users/domain/repositories';
 import { USER_PROFILE_REPOSITORY } from '@users/domain/tokens';
-import { UserId } from '@users/domain/value-objects';
 import { SoftDeleteUserProfileCommand } from './soft-delete-user-profile.command';
 
 @CommandHandler(SoftDeleteUserProfileCommand)
@@ -18,9 +17,7 @@ export class SoftDeleteUserProfileHandler implements ICommandHandler<
 
   async execute(command: SoftDeleteUserProfileCommand): Promise<void> {
     const { userId } = command.payload;
-    const profile = await this.userProfileRepository.findByUserId(
-      UserId.create(userId),
-    );
+    const profile = await this.userProfileRepository.findByUserId(userId);
 
     if (!profile) {
       throw new UserProfileNotFoundException({ userId });

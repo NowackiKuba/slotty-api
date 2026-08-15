@@ -1,0 +1,15 @@
+meta {
+  name: Get By Provider
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/users/me/integrations/:provider
+  body: none
+  auth: inherit
+}
+
+params:path {
+  provider: {{provider}}
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Disconnect
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/users/me/integrations/:provider/disconnect
+  body: none
+  auth: inherit
+}
+
+params:path {
+  provider: {{provider}}
+}

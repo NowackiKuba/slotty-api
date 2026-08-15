@@ -36,7 +36,7 @@ export class CreateUserProfileHandler implements ICommandHandler<
       throw new UserNotFoundException(userId);
     }
 
-    const existing = await this.userProfileRepository.findByUserId(user.id);
+    const existing = await this.userProfileRepository.findByUserId(userId);
 
     if (existing) {
       throw new UserProfileAlreadyExistsException(userId);

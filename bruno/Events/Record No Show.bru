@@ -1,0 +1,19 @@
+meta {
+  name: Record No Show
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/events/:eventId/no-show
+  body: none
+  auth: inherit
+}
+
+params:path {
+  eventId: {{eventId}}
+}
+
+docs {
+  Marks the event as no-show and increments the customer no-show count when assigned.
+}

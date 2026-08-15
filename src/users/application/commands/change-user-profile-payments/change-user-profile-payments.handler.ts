@@ -5,7 +5,6 @@ import type { UserProfileReadModel } from '@users/application/read-models';
 import { UserProfileNotFoundException } from '@users/domain/exceptions/profile';
 import type { IUserProfileRepository } from '@users/domain/repositories';
 import { USER_PROFILE_REPOSITORY } from '@users/domain/tokens';
-import { UserId } from '@users/domain/value-objects';
 import { ChangeUserProfilePaymentsCommand } from './change-user-profile-payments.command';
 
 @CommandHandler(ChangeUserProfilePaymentsCommand)
@@ -22,14 +21,21 @@ export class ChangeUserProfilePaymentsHandler implements ICommandHandler<
   async execute(
     command: ChangeUserProfilePaymentsCommand,
   ): Promise<UserProfileReadModel> {
-    const { userId, paymentMethods, paymentDetails, cancellationWindowHours } =
-      command.payload;
-    const profile = await this.userProfileRepository.findByUserId(
-      UserId.create(userId),
-    );
+    const {
+      userId,
+      settlementType,
+      paymentMethods,
+      paymentDetails,
+      cancellationWindowHours,
+    } = command.payload;
+    const profile = await this.userProfileRepository.findByUserId(userId);
 
     if (!profile) {
       throw new UserProfileNotFoundException({ userId });
+    }
+
+    if (settlementType !== undefined) {
+      profile.changeSettlementType(settlementType);
     }
 
     if (paymentMethods !== undefined) {

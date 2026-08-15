@@ -1,0 +1,21 @@
+meta {
+  name: Change Display Name
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{baseUrl}}/users/me/display-name
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "displayName": "Ada"
+  }
+}

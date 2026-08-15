@@ -1,0 +1,19 @@
+meta {
+  name: Delete Customer
+  type: http
+  seq: 18
+}
+
+delete {
+  url: {{baseUrl}}/customers/:customerId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+docs {
+  Soft-delete. 204 No Content.
+}

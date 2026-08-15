@@ -1,0 +1,30 @@
+meta {
+  name: Change Payments
+  type: http
+  seq: 7
+}
+
+patch {
+  url: {{baseUrl}}/users/me/profile/payments
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "settlementType": "MONTHLY_IN_ADVANCE",
+    "paymentMethods": ["BLIK", "REVOLUT"],
+    "paymentDetails": {
+      "blikPhone": "500123456"
+    },
+    "cancellationWindowHours": 12
+  }
+}
+
+docs {
+  Settlement types: PER_SESSION, WEEKLY_IN_ADVANCE, MONTHLY_IN_ADVANCE, WEEKLY_IN_ARREARS, MONTHLY_IN_ARREARS. Payment methods: BLIK, CASH, REVOLUT.
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Change Pricing
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/users/me/profile/pricing
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "pricePerSession": 18000,
+    "currency": "PLN",
+    "sessionDurationMinutes": 90,
+    "courtFeeIncluded": true,
+    "maxGroupSize": 2
+  }
+}

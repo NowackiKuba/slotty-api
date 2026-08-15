@@ -1,0 +1,22 @@
+meta {
+  name: Change Details
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{baseUrl}}/users/me/profile
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nickname": "Ada",
+    "bio": "Updated bio."
+  }
+}

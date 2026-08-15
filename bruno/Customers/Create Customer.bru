@@ -1,0 +1,39 @@
+meta {
+  name: Create Customer
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/customers
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "source": "manual",
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "nickname": "Janek",
+    "email": "jan.kowalski@example.com",
+    "phoneNumber": "+48500111222",
+    "avatarUrl": "https://example.com/jan.png",
+    "instagramAccountId": null,
+    "whatsappAccountId": null
+  }
+}
+
+script:post-response {
+  if ((res.status === 201 || res.status === 200) && res.body && res.body.id) {
+    bru.setEnvVar("customerId", res.body.id);
+  }
+}
+
+docs {
+  Source: manual | ig | whatsapp | mobile | web. Saves customerId on 201.
+}

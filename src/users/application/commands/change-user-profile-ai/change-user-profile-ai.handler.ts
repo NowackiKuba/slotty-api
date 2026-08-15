@@ -5,7 +5,6 @@ import type { UserProfileReadModel } from '@users/application/read-models';
 import { UserProfileNotFoundException } from '@users/domain/exceptions/profile';
 import type { IUserProfileRepository } from '@users/domain/repositories';
 import { USER_PROFILE_REPOSITORY } from '@users/domain/tokens';
-import { UserId } from '@users/domain/value-objects';
 import { ChangeUserProfileAiCommand } from './change-user-profile-ai.command';
 
 @CommandHandler(ChangeUserProfileAiCommand)
@@ -29,9 +28,7 @@ export class ChangeUserProfileAiHandler implements ICommandHandler<
       aiCustomInstructions,
       googleCalendarId,
     } = command.payload;
-    const profile = await this.userProfileRepository.findByUserId(
-      UserId.create(userId),
-    );
+    const profile = await this.userProfileRepository.findByUserId(userId);
 
     if (!profile) {
       throw new UserProfileNotFoundException({ userId });

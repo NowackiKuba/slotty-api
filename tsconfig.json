@@ -19,7 +19,7 @@
       "@common/*": ["src/common/*"],
       "@users/*": ["src/users/*"],
       "@customers/*": ["src/customers/*"],
-      "@challenges/*": ["src/challenges/*"],
+      "@events/*": ["src/events/*"],
       "@energy-profiles/*": ["src/energy-profiles/*"],
       "@check-ins/*": ["src/check-ins/*"],
       "@notifications/*": ["src/notifications/*"],

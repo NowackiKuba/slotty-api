@@ -1,4 +1,5 @@
 export { PaymentMethod, isPaymentMethod } from './payment-method.enum';
+export { SettlementType, isSettlementType } from './settlement-type.enum';
 export { Sport, isSport } from './sport.enum';
 export {
   IntegrationProviderEnum,

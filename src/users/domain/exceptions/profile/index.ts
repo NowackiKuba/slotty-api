@@ -1,6 +1,7 @@
 export { InvalidLocationPointException } from './invalid-location-point.exception';
 export { InvalidPaymentDetailsException } from './invalid-payment-details.exception';
 export { InvalidPaymentMethodException } from './invalid-payment-method.exception';
+export { InvalidSettlementTypeException } from './invalid-settlement-type.exception';
 export { InvalidSessionDurationException } from './invalid-session-duration.exception';
 export { InvalidSessionPriceException } from './invalid-session-price.exception';
 export { InvalidSportException } from './invalid-sport.exception';

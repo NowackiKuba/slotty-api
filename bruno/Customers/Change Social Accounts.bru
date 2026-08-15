@@ -1,0 +1,26 @@
+meta {
+  name: Change Social Accounts
+  type: http
+  seq: 9
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId/social-accounts
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "instagramAccountId": "ig_123",
+    "whatsappAccountId": "wa_456"
+  }
+}

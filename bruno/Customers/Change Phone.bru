@@ -1,0 +1,25 @@
+meta {
+  name: Change Phone
+  type: http
+  seq: 7
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId/phone
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "phoneNumber": "+48500999888"
+  }
+}

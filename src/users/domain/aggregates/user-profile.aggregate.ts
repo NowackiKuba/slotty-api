@@ -2,12 +2,15 @@ import { Currency } from '@common/domain/enums';
 import { AggregateRoot } from '@common/domain';
 import {
   isPaymentMethod,
+  isSettlementType,
   isSport,
+  SettlementType,
   type PaymentMethod,
   type Sport,
 } from '@users/domain/enums';
 import {
   InvalidPaymentMethodException,
+  InvalidSettlementTypeException,
   InvalidSportException,
   InvalidUserProfileException,
 } from '@users/domain/exceptions/profile';
@@ -45,6 +48,7 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
   private _courtFeeIncluded: boolean;
   private _maxGroupSize?: number;
   private _cancellationWindowHours?: number;
+  private _settlementType: SettlementType;
   private _paymentMethods: PaymentMethod[];
   private _paymentDetails?: PaymentDetails;
   private _aiEnabled: boolean;
@@ -66,6 +70,7 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
     this._courtFeeIncluded = props.courtFeeIncluded;
     this._maxGroupSize = props.maxGroupSize;
     this._cancellationWindowHours = props.cancellationWindowHours;
+    this._settlementType = props.settlementType;
     this._paymentMethods = props.paymentMethods;
     this._paymentDetails = props.paymentDetails;
     this._aiEnabled = props.aiEnabled;
@@ -94,6 +99,7 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
       cancellationWindowHours: parseCancellationWindow(
         props.cancellationWindowHours,
       ),
+      settlementType: parseSettlementType(props.settlementType),
       paymentMethods: parsePaymentMethods(props.paymentMethods),
       paymentDetails: props.paymentDetails
         ? PaymentDetails.create(props.paymentDetails)
@@ -101,11 +107,12 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
       aiEnabled: props.aiEnabled ?? false,
       autoConfirmBookings: props.autoConfirmBookings ?? false,
       aiCustomInstructions: parseInstructions(props.aiCustomInstructions),
-      googleCalendarId: optionalText(
-        props.googleCalendarId ?? undefined,
-        256,
-        'googleCalendarId',
-      ) ?? null,
+      googleCalendarId:
+        optionalText(
+          props.googleCalendarId ?? undefined,
+          256,
+          'googleCalendarId',
+        ) ?? null,
     });
 
     profile.assertHasLocation();
@@ -162,6 +169,10 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
 
   get cancellationWindowHours(): number | undefined {
     return this._cancellationWindowHours;
+  }
+
+  get settlementType(): SettlementType {
+    return this._settlementType;
   }
 
   get paymentMethods(): PaymentMethod[] {
@@ -248,6 +259,11 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
     this.touch();
   }
 
+  changeSettlementType(type: string): void {
+    this._settlementType = parseSettlementType(type);
+    this.touch();
+  }
+
   changePaymentMethods(methods: string[]): void {
     this._paymentMethods = parsePaymentMethods(methods);
     this.touch();
@@ -295,6 +311,7 @@ export class UserProfile extends AggregateRoot<UserProfileId> {
       courtFeeIncluded: this._courtFeeIncluded,
       maxGroupSize: this._maxGroupSize ?? null,
       cancellationWindowHours: this._cancellationWindowHours ?? null,
+      settlementType: this._settlementType,
       paymentMethods: [...this._paymentMethods],
       paymentDetails: this._paymentDetails?.toProps() ?? null,
       aiEnabled: this._aiEnabled,
@@ -336,6 +353,20 @@ function parseSports(sports: string[]): Sport[] {
   return [...unique];
 }
 
+function parseSettlementType(value?: string): SettlementType {
+  if (!value) {
+    return SettlementType.PER_SESSION;
+  }
+
+  const normalized = value.trim().toUpperCase();
+
+  if (!isSettlementType(normalized)) {
+    throw new InvalidSettlementTypeException(value);
+  }
+
+  return normalized;
+}
+
 function parsePaymentMethods(methods?: string[]): PaymentMethod[] {
   if (!methods?.length) {
     return [];
@@ -361,7 +392,9 @@ function parseInstructions(instructions?: string[]): string[] {
     return [];
   }
 
-  return instructions.map((item) => item.trim()).filter((item) => item.length > 0);
+  return instructions
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
 }
 
 function parseMaxGroupSize(value?: number): number | undefined {

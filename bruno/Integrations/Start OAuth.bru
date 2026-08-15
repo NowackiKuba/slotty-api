@@ -1,0 +1,15 @@
+meta {
+  name: Start OAuth
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/users/me/integrations/:provider/oauth/start
+  body: none
+  auth: inherit
+}
+
+params:path {
+  provider: {{provider}}
+}

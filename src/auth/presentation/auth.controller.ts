@@ -8,6 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@common/application/cqrs';
+import { DevLoginCommand } from '@auth/application/commands/dev-login/dev-login.command';
 import { LogoutCommand } from '@auth/application/commands/logout/logout.command';
 import { RefreshTokenCommand } from '@auth/application/commands/refresh-token/refresh-token.command';
 import { SocialLoginCommand } from '@auth/application/commands/social-login/social-login.command';
@@ -16,6 +17,7 @@ import {
   CurrentUser,
   type CurrentUserPayload,
 } from './decorators/current-user.decorator';
+import { DevLoginDto } from './dto/dev-login.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { SocialLoginDto } from './dto/social-login.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -26,6 +28,19 @@ export class AuthController {
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
   ) {}
+
+  @Post('dev')
+  @HttpCode(HttpStatus.OK)
+  dev(@Body() body: DevLoginDto) {
+    return this.commandBus.execute(
+      new DevLoginCommand({
+        email: body.email,
+        firstName: body.firstName,
+        lastName: body.lastName,
+        displayName: body.displayName,
+      }),
+    );
+  }
 
   @Post('google')
   @HttpCode(HttpStatus.OK)

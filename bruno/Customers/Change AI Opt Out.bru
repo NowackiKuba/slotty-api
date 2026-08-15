@@ -1,0 +1,25 @@
+meta {
+  name: Change AI Opt Out
+  type: http
+  seq: 11
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId/ai-opt-out
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "aiOptOut": false
+  }
+}

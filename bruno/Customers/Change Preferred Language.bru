@@ -1,0 +1,25 @@
+meta {
+  name: Change Preferred Language
+  type: http
+  seq: 12
+}
+
+patch {
+  url: {{baseUrl}}/customers/:customerId/preferred-language
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+params:path {
+  customerId: {{customerId}}
+}
+
+body:json {
+  {
+    "preferredLanguage": "pl"
+  }
+}

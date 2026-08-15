@@ -1,0 +1,15 @@
+meta {
+  name: Confirm Event
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/events/:eventId/confirm
+  body: none
+  auth: inherit
+}
+
+params:path {
+  eventId: {{eventId}}
+}
