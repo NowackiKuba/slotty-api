@@ -1,0 +1,57 @@
+meta {
+  name: WhatsApp Inbound
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/webhooks/meta
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "object": "whatsapp_business_account",
+    "entry": [
+      {
+        "id": "waba-id",
+        "changes": [
+          {
+            "field": "messages",
+            "value": {
+              "messaging_product": "whatsapp",
+              "metadata": {
+                "display_phone_number": "15551234567",
+                "phone_number_id": "phone-number-id"
+              },
+              "contacts": [
+                {
+                  "profile": { "name": "Jan Kowalski" },
+                  "wa_id": "48500111222"
+                }
+              ],
+              "messages": [
+                {
+                  "from": "48500111222",
+                  "id": "wamid.whatsapp.001",
+                  "timestamp": "1710000000",
+                  "type": "text",
+                  "text": { "body": "Cześć, chcę umówić trening" }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+docs {
+  Incoming WhatsApp Cloud API message. phone_number_id must match UserIntegration.externalAccountId.
+}

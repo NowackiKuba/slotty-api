@@ -1,0 +1,30 @@
+meta {
+  name: SMS Inbound
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/webhooks/sms
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-webhook-secret: sms-webhook-secret
+}
+
+body:json {
+  {
+    "from": "48500111222",
+    "to": "48100100100",
+    "text": "Cześć, chcę umówić trening",
+    "externalMessageId": "sms-001"
+  }
+}
+
+docs {
+  Incoming SMS. `to` is the trainer SMS_PROVIDER externalAccountId.
+  Header `x-webhook-secret` must match SMS_WEBHOOK_SECRET when configured.
+}

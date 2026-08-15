@@ -24,6 +24,7 @@
       "@broadcasts/*": ["src/broadcasts/*"],
       "@packages/*": ["src/packages/*"],
       "@auth/*": ["src/auth/*"],
+      "@webhooks/*": ["src/webhooks/*"],
       "@ai/*": ["src/ai/*"],
       "@insights/*": ["src/insights/*"],
       "@subscriptions/*": ["src/subscriptions/*"]

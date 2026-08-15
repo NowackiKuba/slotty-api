@@ -1,0 +1,21 @@
+meta {
+  name: Verify Meta
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/webhooks/meta
+  body: none
+  auth: none
+}
+
+params:query {
+  hub.mode: subscribe
+  hub.verify_token: slotty-verify-token
+  hub.challenge: 1234567890
+}
+
+docs {
+  Meta webhook handshake. Response body is the challenge as plain text.
+}

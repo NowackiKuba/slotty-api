@@ -53,6 +53,7 @@
     "ioredis": "^5.11.1",
     "jose": "^6.2.3",
     "nestjs-zod": "^5.4.0",
+    "openai": "^6.49.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "zod": "^4.4.3"
@@ -104,7 +105,12 @@
       "^@energy-profiles/(.*)$": "<rootDir>/energy-profiles/$1",
       "^@check-ins/(.*)$": "<rootDir>/check-ins/$1",
       "^@notifications/(.*)$": "<rootDir>/notifications/$1",
+      "^@messages/(.*)$": "<rootDir>/messages/$1",
+      "^@events/(.*)$": "<rootDir>/events/$1",
+      "^@broadcasts/(.*)$": "<rootDir>/broadcasts/$1",
+      "^@packages/(.*)$": "<rootDir>/packages/$1",
       "^@auth/(.*)$": "<rootDir>/auth/$1",
+      "^@webhooks/(.*)$": "<rootDir>/webhooks/$1",
       "^@ai/(.*)$": "<rootDir>/ai/$1",
       "^@insights/(.*)$": "<rootDir>/insights/$1",
       "^@subscriptions/(.*)$": "<rootDir>/subscriptions/$1"

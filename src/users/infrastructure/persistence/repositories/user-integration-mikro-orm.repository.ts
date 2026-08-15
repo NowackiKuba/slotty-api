@@ -11,9 +11,7 @@ import { UserIntegrationMikroOrmEntity } from '../entities/user-integration-mikr
 import { UserIntegrationPersistenceMapper } from '../mappers/user-integration.persistence-mapper';
 
 @Injectable()
-export class UserIntegrationMikroOrmRepository
-  implements IUserIntegrationRepository
-{
+export class UserIntegrationMikroOrmRepository implements IUserIntegrationRepository {
   constructor(
     private readonly mapper: UserIntegrationPersistenceMapper,
     private readonly em: EntityManager,
@@ -78,6 +76,32 @@ export class UserIntegrationMikroOrmRepository
     );
 
     return integration ? this.mapper.toDomain(integration) : null;
+  }
+
+  async findUsableByProviderAndAccountIds(
+    provider: IntegrationProviderEnum,
+    accountIds: string[],
+  ): Promise<UserIntegration | null> {
+    const ids = [...new Set(accountIds.map((id) => id.trim()).filter(Boolean))];
+
+    if (ids.length === 0) {
+      return null;
+    }
+
+    const integrations = await this.repository.find(
+      { provider, externalAccountId: { $in: ids } },
+      { populate: ['user'] },
+    );
+
+    for (const integration of integrations) {
+      const domain = this.mapper.toDomain(integration);
+
+      if (domain.status.isUsable) {
+        return domain;
+      }
+    }
+
+    return null;
   }
 
   async save(integration: UserIntegration): Promise<void> {

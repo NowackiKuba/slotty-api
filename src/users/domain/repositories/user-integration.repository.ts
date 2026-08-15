@@ -1,7 +1,5 @@
 import type { UserIntegration } from '@users/domain/aggregates';
-import type {
-  IntegrationProviderEnum,
-} from '@users/domain/enums';
+import type { IntegrationProviderEnum } from '@users/domain/enums';
 import type { UserId, UserIntegrationId } from '@users/domain/value-objects';
 
 export interface IUserIntegrationRepository {
@@ -17,6 +15,10 @@ export interface IUserIntegrationRepository {
   findByUserIdAndProviderIncludingDeleted(
     userId: UserId,
     provider: IntegrationProviderEnum,
+  ): Promise<UserIntegration | null>;
+  findUsableByProviderAndAccountIds(
+    provider: IntegrationProviderEnum,
+    accountIds: string[],
   ): Promise<UserIntegration | null>;
   save(integration: UserIntegration): Promise<void>;
 }
