@@ -1,0 +1,15 @@
+meta {
+  name: Get Broadcast
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/broadcasts/{{broadcastId}}
+  body: none
+  auth: inherit
+}
+
+docs {
+  GET /api/broadcasts/:broadcastId
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Update Recipient
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/broadcasts/{{broadcastId}}/recipients/{{customerId}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "SENT",
+    "messageId": "{{messageId}}"
+  }
+}
+
+docs {
+  PATCH /api/broadcasts/:broadcastId/recipients/:customerId
+  Status: PROCESSING | SENT | DELIVERED | FAILED.
+}

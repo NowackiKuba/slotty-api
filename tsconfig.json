@@ -21,7 +21,7 @@
       "@customers/*": ["src/customers/*"],
       "@events/*": ["src/events/*"],
       "@messages/*": ["src/messages/*"],
-      "@check-ins/*": ["src/check-ins/*"],
+      "@broadcasts/*": ["src/broadcasts/*"],
       "@notifications/*": ["src/notifications/*"],
       "@auth/*": ["src/auth/*"],
       "@ai/*": ["src/ai/*"],

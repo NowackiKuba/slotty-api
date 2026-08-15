@@ -1,0 +1,15 @@
+meta {
+  name: Delete Broadcast
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/broadcasts/{{broadcastId}}
+  body: none
+  auth: inherit
+}
+
+docs {
+  DELETE /api/broadcasts/:broadcastId
+}

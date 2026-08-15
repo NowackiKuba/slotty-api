@@ -1,0 +1,27 @@
+meta {
+  name: Update Broadcast
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/broadcasts/{{broadcastId}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "messageText": "Zmiana planu: treningi od wtorku.",
+    "customerIds": ["{{customerId}}"]
+  }
+}
+
+docs {
+  PATCH /api/broadcasts/:broadcastId
+  Only drafts can be updated.
+}

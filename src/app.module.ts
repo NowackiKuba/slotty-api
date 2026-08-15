@@ -7,6 +7,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
 import { AuthModule } from '@auth/auth.module';
 import { CustomersModule } from '@customers/customers.module';
 import { EventsModule } from '@events/events.module';
+import { BroadcastsModule } from '@broadcasts/broadcasts.module';
 import { MessagesModule } from '@messages/messages.module';
 import { UsersModule } from '@users/users.module';
 import { AppController } from './app.controller';
@@ -31,6 +32,7 @@ import mikroOrmConfig from './database/mikro-orm.config';
     CustomersModule,
     EventsModule,
     MessagesModule,
+    BroadcastsModule,
     AuthModule,
   ],
   controllers: [AppController],

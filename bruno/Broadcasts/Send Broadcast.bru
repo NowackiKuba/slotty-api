@@ -1,0 +1,15 @@
+meta {
+  name: Send Broadcast
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/broadcasts/{{broadcastId}}/send
+  body: none
+  auth: inherit
+}
+
+docs {
+  POST /api/broadcasts/:broadcastId/send
+}
