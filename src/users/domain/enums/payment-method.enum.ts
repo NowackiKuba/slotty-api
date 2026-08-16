@@ -1,7 +1,7 @@
 export enum PaymentMethod {
   BLIK = 'BLIK',
+  BANK_TRANSFER = 'BANK_TRANSFER',
   CASH = 'CASH',
-  REVOLUT = 'REVOLUT',
 }
 
 const PAYMENT_METHOD_VALUES = new Set<string>(Object.values(PaymentMethod));

@@ -25,7 +25,7 @@ export type UserProfileMikroOrmEntityProps = {
   maxGroupSize?: number; // np. 1 (personalny), 4 (padel)
   cancellationWindowHours?: number; // np. 24 (godziny przed treningiem)
   settlementType?: SettlementType; // default: PER_SESSION
-  paymentMethods?: string[]; // ['BLIK', 'CASH', 'REVOLUT']
+  paymentMethods?: string[]; // ['BLIK', 'BANK_TRANSFER', 'CASH']
   paymentDetails?: PaymentDetailsProps;
   aiEnabled?: boolean; // Włączony/Wyłączony bot AI
   autoConfirmBookings?: boolean; // Czy automatem wpisuje w kalendarz, czy czeka na klik trenera

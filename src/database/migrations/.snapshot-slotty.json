@@ -1610,8 +1610,8 @@
           "comment": null,
           "enumItems": [
             "BLIK",
-            "CASH",
-            "REVOLUT"
+            "BANK_TRANSFER",
+            "CASH"
           ],
           "mappedType": "enum"
         },
