@@ -26,6 +26,12 @@ Migracje: `…53802` users, `…63420` customers, `…184500` integrations, `…
 
 Po pullu: `npm run migration:up`.
 
+## Dev seeder
+
+`npm run seed:dev` zapełnia jedno konto trenera (domyślnie `004486ad-…3a64`) pełnym zestawem danych: profil, godziny pracy, 4 integracje, 48 klientów, 6 szablonów pakietów, ~40 pakietów klientów, ~1400 wydarzeń (7 mies. wstecz → 2 mies. w przód, bez nakładek), ~800 wiadomości w wątkach i 8 ogłoszeń z odbiorcami.
+
+Flagi: `--user=<uuid> --customers=60 --months-back=9 --months-forward=3 --seed=7 --keep`. Ten sam `--seed` daje identyczne dane. Domyślnie kasuje poprzednie dane TEGO usera (`--keep` dopisuje). Odmawia startu przy `NODE_ENV=production`.
+
 ## Packages
 
 Agregaty:
