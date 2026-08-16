@@ -1,0 +1,16 @@
+meta {
+  name: Reverse Geocode
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/geo/reverse?lat=52.2297&lng=21.0122
+  body: none
+  auth: inherit
+}
+
+params:query {
+  lat: 52.2297
+  lng: 21.0122
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Get Place Details
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/geo/places/{{placeId}}?sessionToken=8f1c6e0a
+  body: none
+  auth: inherit
+}
+
+params:query {
+  sessionToken: 8f1c6e0a
+}

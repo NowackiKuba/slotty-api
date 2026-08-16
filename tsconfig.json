@@ -26,6 +26,7 @@
       "@auth/*": ["src/auth/*"],
       "@webhooks/*": ["src/webhooks/*"],
       "@ai/*": ["src/ai/*"],
+      "@geo/*": ["src/geo/*"],
       "@insights/*": ["src/insights/*"],
       "@subscriptions/*": ["src/subscriptions/*"]
     },
